@@ -1,0 +1,10 @@
+wS = 0.6 * pi;
+wP = 0.4 * pi;
+wT = wS - wP;
+M = ceil(6.6 * pi / wT);
+alpha = (M - 1) / 2;
+n = 0:M-1;
+wC = (wP + wS) / 2;
+h = (wC / pi) * sinc((wC / pi) * (n - alpha)) .* hamming(M);
+[H,W] = freqz(h, 1);
+plot(W / pi, 20*log10(abs(H)));

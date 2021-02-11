@@ -1,0 +1,17 @@
+M = 21;
+bm = blackman(M);
+subplot(3, 1, 1);
+stem(bm);
+[H, W] = freqz(bm);
+subplot(3, 1, 2);
+plot(W / pi, 20 * log10(abs(H)));
+M = 61;
+wc = 0.65;
+bm = blackman(M+1);
+h = fir1(M, wc, 'low', bm);
+[H, W] = freqz(h);
+subplot(3, 1, 3);
+plot(W / pi, 20 * log10(abs(H)));
+load speech2.mat;
+filt_speech2 = filter(h, 1, speech2);
+sound(filt_speech2);
